@@ -22,7 +22,43 @@
                     return "Scissors";
             }
         }
-        console.log(getComputerChoice())
+        // console.log(getComputerChoice())
+
+
+
+
+        // playRound() takes player selection and computer selection and case-formats player selection, then determines a winner or tie, if there is a tie then player is prompted for a new selection and a new random computer selection is made
+        function playRound(playerSelection, computerSelection) {
+
+            
+            playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)
+
+
+            switch (true) {
+
+                case ((playerSelection === "Rock") && (computerSelection === "Paper")):
+                case ((playerSelection === "Paper") && (computerSelection === "Scissors")):
+                case ((playerSelection === "Scissors") && (computerSelection === "Rock")):
+                    return `You lose! ${computerSelection} beats ${playerSelection}`; // this will get changed to return 0
+                
+                case (playerSelection == computerSelection):
+                    let newPlayerChoice = prompt("Tie! Rock, Paper, or Scissors?");
+                    let result = playRound(newPlayerChoice, getComputerChoice());
+                    return result;
+
+                default:
+                    return `You win! ${playerSelection} beats ${computerSelection}`;
+
+            }
+
+            
+            
+
+        }
+
+        console.log(playRound(prompt("Rock, Paper, or Scissors?"), getComputerChoice()))
+
+
     </script>
 </body>
 </html>
