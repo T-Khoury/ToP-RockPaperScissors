@@ -39,7 +39,8 @@
                 case ((playerSelection === "Rock") && (computerSelection === "Paper")):
                 case ((playerSelection === "Paper") && (computerSelection === "Scissors")):
                 case ((playerSelection === "Scissors") && (computerSelection === "Rock")):
-                    return `You lose! ${computerSelection} beats ${playerSelection}`; // this will get changed to return 0
+                    console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+                    return 0;
                 
                 case (playerSelection == computerSelection):
                     let newPlayerChoice = prompt("Tie! Rock, Paper, or Scissors?");
@@ -47,16 +48,37 @@
                     return result;
 
                 default:
-                    return `You win! ${playerSelection} beats ${computerSelection}`;
-
+                    console.log(`You win! ${playerSelection} beats ${computerSelection}`); // this will get changed to return 1
+                    return 1;
             }
-
-            
-            
-
         }
 
-        console.log(playRound(prompt("Rock, Paper, or Scissors?"), getComputerChoice()))
+
+        function game() {
+
+            let playerScore = 0;
+            let computerScore = 0;
+            let playerChoice;
+            for (let i = 0; i < 5; i++) {
+                playerChoice = prompt("Rock, Paper, or Scissors?");
+                if (playRound(playerChoice, getComputerChoice()) == 1) {
+                    playerScore += 1;
+                }
+                else {
+                    computerScore += 1;
+                }
+            }
+            if (playerScore > computerScore) {
+                console.log(`You won the game! Final score: ${playerScore}:${computerScore}`);
+            }
+            else {
+                console.log(`You lost the game. Final score: ${computerScore}:${playerScore}`);
+            }
+        }
+
+        game();
+
+        
 
 
     </script>
