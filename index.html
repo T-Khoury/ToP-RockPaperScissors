@@ -4,10 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <div class="game">
+
+        <div class="container" id="score">
+            <p class="player"></p>
+            <p class="computer"></p>
+            
+        </div>
+
+        <div class="container" id="results">
+            <p></p>
+
+        </div>
+        <div class="container" id="buttons">
+            <button id="Rock"><img src="images/rock-pixel-art.png" alt="pixel-rock"></button>
+            <button id="Paper"><img src="images/scroll-pixel-art.png" alt="pixel-paper"></button>
+            <button id="Scissors"><img src="images/scissors-pixel-art.png" alt="pixel-scissors"></button>
+            
+        </div>
+    </div>
+
+
+
     <script>
+
+        var playerScore = 0;
+        var computerScore = 0;
+
+
+        const playerScoreContainer = document.querySelector('#score .player');
+        const computerScoreContainer = document.querySelector('#score .computer');
+
+        const results = document.querySelector('#results');
+
+
+        const buttons = document.querySelectorAll('#buttons button');
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', playRound)       
+        });
+
+
 
         // getComputerChoice() generates a random number [0,2] and returns rock for 0, paper for 1, and scissors for 2
         function getComputerChoice() {
@@ -22,61 +63,67 @@
                     return "Scissors";
             }
         }
-        // console.log(getComputerChoice())
 
+        function resetScore() {
+            playerScore = 0;
+            computerScore = 0;
+            updateScore();
+        }
 
+        function updateScore() {
+            playerScoreContainer.textContent = `${playerScore}`;
+            computerScoreContainer.textContent = `${computerScore}`;
+        }
 
+        function checkScore() {
+            if (playerScore == 5) {
+                results.textContent = `You Win! Score: ${playerScore} : ${computerScore}`;
+                resetScore();
+            }
+            else if (computerScore == 5) {
+                results.textContent = `You Lose! Score: ${playerScore} : ${computerScore}`;
+                resetScore();
+            }
+        }
 
-        // playRound() takes player selection and computer selection and case-formats player selection, then determines a winner or tie, if there is a tie then player is prompted for a new selection and a new random computer selection is made
-        function playRound(playerSelection, computerSelection) {
-
+        
             
-            playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)
 
+
+
+        function playRound(e) {
+            let playerSelection = this.id;
+            let computerSelection = getComputerChoice();
 
             switch (true) {
 
                 case ((playerSelection === "Rock") && (computerSelection === "Paper")):
                 case ((playerSelection === "Paper") && (computerSelection === "Scissors")):
                 case ((playerSelection === "Scissors") && (computerSelection === "Rock")):
-                    console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-                    return 0;
+                    results.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
+                    computerScore += 1;
+                    break;
                 
                 case (playerSelection == computerSelection):
-                    let newPlayerChoice = prompt("Tie! Rock, Paper, or Scissors?");
-                    let result = playRound(newPlayerChoice, getComputerChoice());
-                    return result;
+                    //let result = playRound(newPlayerChoice, getComputerChoice());
+                    // return result;
+                    results.textContent = 'Tie!';
+                    break;
+
 
                 default:
-                    console.log(`You win! ${playerSelection} beats ${computerSelection}`); // this will get changed to return 1
-                    return 1;
-            }
-        }
-
-
-        function game() {
-
-            let playerScore = 0;
-            let computerScore = 0;
-            let playerChoice;
-            for (let i = 0; i < 5; i++) {
-                playerChoice = prompt("Rock, Paper, or Scissors?");
-                if (playRound(playerChoice, getComputerChoice()) == 1) {
+                    results.textContent = `You win! ${playerSelection} beats ${computerSelection}`; 
                     playerScore += 1;
-                }
-                else {
-                    computerScore += 1;
-                }
+                    break;
             }
-            if (playerScore > computerScore) {
-                console.log(`You won the game! Final score: ${playerScore}:${computerScore}`);
-            }
-            else {
-                console.log(`You lost the game. Final score: ${computerScore}:${playerScore}`);
-            }
+            updateScore();
+            checkScore();
         }
 
-        game();
+
+        
+
+       
 
         
 
