@@ -67,7 +67,6 @@ body {
 #buttons {
     display: flex;
     justify-content: space-around;
-    flex-grow: 1;
     width: 100%;
     height: 33.3%;
     margin-left: 10%;
@@ -85,7 +84,7 @@ button {
     cursor: grab;
 }
 
-button:hover {
+img:hover {
     transform: scale(1.15);
 }
 
