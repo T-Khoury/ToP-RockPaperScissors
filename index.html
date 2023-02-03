@@ -10,36 +10,28 @@
 <body>
     <div class="game">
 
-        
-
         <div class="container" id="results">
             <p>Rock, Paper, Scissors! First to 5 Wins!</p>
-
         </div>
 
         <div class="container" id="score">
             <div class="player">
                 <h3 class="player">0</h3>
                     <p class="name">YOU</p>
-
             </div>
+
             <div class="computer">
                 <h3 class="computer">0</h3>
                     <p class="name">CPU</p>
-            </div>
-            
-            
+            </div>  
         </div>
 
         <div class="container" id="buttons">
             <button id="Rock"><img src="images/rock-pixel.png" alt="pixel-rock"></button>
             <button id="Paper"><img src="images/scroll-pixel.png" alt="pixel-paper"></button>
             <button id="Scissors"><img src="images/scissors-pixel-art.png" alt="pixel-scissors"></button>
-            
         </div>
     </div>
-
-
 
     <script>
 
@@ -59,8 +51,6 @@
             button.addEventListener('click', playRound)       
         });
 
-
-
         // getComputerChoice() generates a random number [0,2] and returns rock for 0, paper for 1, and scissors for 2
         function getComputerChoice() {
             let randomNumber = Math.floor(Math.random() * 3);
@@ -75,15 +65,15 @@
             }
         }
 
+        function updateScore() {
+            playerScoreContainer.textContent = `${playerScore}`;
+            computerScoreContainer.textContent = `${computerScore}`;
+        }
+
         function resetScore() {
             playerScore = 0;
             computerScore = 0;
             updateScore();
-        }
-
-        function updateScore() {
-            playerScoreContainer.textContent = `${playerScore}`;
-            computerScoreContainer.textContent = `${computerScore}`;
         }
 
         function checkScore() {
@@ -96,11 +86,6 @@
                 resetScore();
             }
         }
-
-        
-            
-
-
 
         function playRound(e) {
             let playerSelection = this.id;
@@ -130,15 +115,7 @@
             updateScore();
             checkScore();
         }
-
-
         
-
-       
-
-        
-
-
     </script>
 </body>
 </html>
