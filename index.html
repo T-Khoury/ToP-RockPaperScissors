@@ -18,8 +18,17 @@
         </div>
 
         <div class="container" id="score">
-            <p class="player"></p>
-            <p class="computer"></p>
+            <div class="player">
+                <h3 class="player">0</h3>
+                    <p class="name">YOU</p>
+
+            </div>
+            <div class="computer">
+                <h3 class="computer">0</h3>
+                    <p class="name">CPU</p>
+            </div>
+            
+            
         </div>
 
         <div class="container" id="buttons">
@@ -38,8 +47,8 @@
         var computerScore = 0;
 
 
-        const playerScoreContainer = document.querySelector('#score .player');
-        const computerScoreContainer = document.querySelector('#score .computer');
+        const playerScoreContainer = document.querySelector('#score h3.player');
+        const computerScoreContainer = document.querySelector('#score h3.computer');
 
         const results = document.querySelector('#results p');
 
